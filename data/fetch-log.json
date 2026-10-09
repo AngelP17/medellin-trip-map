@@ -1,20 +1,9 @@
 {
-  "started": "2026-10-09T00:38:35Z",
+  "started": "2026-10-09T00:53:18Z",
   "failures": [],
-  "counts": {
-    "terrain": {
-      "requested": 66,
-      "saved": 66,
-      "empty": 0
-    },
-    "vector": {
-      "requested": 742,
-      "saved": 742,
-      "empty": 0
-    },
-    "glyphs": 9,
-    "routes": 11
-  },
-  "terrain_ext": "webp",
-  "finished": "2026-10-09T00:49:00Z"
+  "counts": {},
+  "finished": "2026-10-09T00:54:44Z",
+  "steps": [
+    "geocode2"
+  ]
 }

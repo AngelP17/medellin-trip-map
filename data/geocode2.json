@@ -1,0 +1,577 @@
+{
+  "H_corner_calle12_cra43D": [
+    {
+      "type": "node",
+      "id": 1815268850,
+      "lat": 6.2135605,
+      "lon": -75.5715819
+    },
+    {
+      "type": "way",
+      "id": 34349508,
+      "tags": {
+        "highway": "residential",
+        "name": "Calle 12",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "way",
+      "id": 34349646,
+      "tags": {
+        "highway": "residential",
+        "name": "Calle 12",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "way",
+      "id": 58093299,
+      "tags": {
+        "highway": "residential",
+        "name": "Calle 12",
+        "oneway": "yes",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "way",
+      "id": 173105445,
+      "tags": {
+        "highway": "residential",
+        "name": "Calle 12",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "way",
+      "id": 367151298,
+      "tags": {
+        "highway": "residential",
+        "name": "Calle 12",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "way",
+      "id": 34616459,
+      "tags": {
+        "cycleway": "shared_lane",
+        "highway": "tertiary",
+        "lanes": "2",
+        "maxspeed": "30",
+        "name": "Carrera 43D",
+        "oneway": "yes",
+        "source:maxspeed": "marking",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "way",
+      "id": 34734534,
+      "tags": {
+        "highway": "residential",
+        "name": "Carrera 43D",
+        "oneway": "yes",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "way",
+      "id": 34734548,
+      "tags": {
+        "highway": "residential",
+        "lanes": "1",
+        "name": "Carrera 43D",
+        "oneway": "yes",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "way",
+      "id": 352827772,
+      "tags": {
+        "highway": "residential",
+        "lanes": "1",
+        "name": "Carrera 43D",
+        "oneway": "yes",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "way",
+      "id": 504303053,
+      "tags": {
+        "highway": "residential",
+        "lanes": "2",
+        "name": "Carrera 43D",
+        "surface": "asphalt"
+      }
+    }
+  ],
+  "H_corner_calle12_cra43E": [
+    {
+      "type": "node",
+      "id": 3617139105,
+      "lat": 6.2139473,
+      "lon": -75.5727026
+    },
+    {
+      "type": "way",
+      "id": 34349508,
+      "tags": {
+        "highway": "residential",
+        "name": "Calle 12",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "way",
+      "id": 34349646,
+      "tags": {
+        "highway": "residential",
+        "name": "Calle 12",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "way",
+      "id": 58093299,
+      "tags": {
+        "highway": "residential",
+        "name": "Calle 12",
+        "oneway": "yes",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "way",
+      "id": 173105445,
+      "tags": {
+        "highway": "residential",
+        "name": "Calle 12",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "way",
+      "id": 367151298,
+      "tags": {
+        "highway": "residential",
+        "name": "Calle 12",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "way",
+      "id": 34687122,
+      "tags": {
+        "cycleway": "shared_lane",
+        "highway": "residential",
+        "lit": "yes",
+        "maxspeed": "30",
+        "maxspeed:type": "CO:urban",
+        "name": "Carrera 43E",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "way",
+      "id": 34733133,
+      "tags": {
+        "highway": "residential",
+        "name": "Carrera 43E",
+        "oneway": "no",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "way",
+      "id": 197615626,
+      "tags": {
+        "highway": "residential",
+        "name": "Carrera 43E",
+        "oneway": "yes",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "way",
+      "id": 570319011,
+      "tags": {
+        "highway": "residential",
+        "name": "Carrera 43E",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1434504752,
+      "tags": {
+        "highway": "footway",
+        "name": "Carrera 43E",
+        "surface": "asphalt"
+      }
+    }
+  ],
+  "H_named": [],
+  "H_addr": [
+    {
+      "type": "node",
+      "id": 4163345894,
+      "lat": 6.2138952,
+      "lon": -75.572406,
+      "tags": {
+        "addr:housenumber": "43D-94",
+        "addr:street": "Calle 12",
+        "name": "Purple Monkey Hostel",
+        "tourism": "hostel",
+        "website": "https://www.purplemonkeyhostel.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12376170701,
+      "lat": 6.2138201,
+      "lon": -75.5720959,
+      "tags": {
+        "addr:housenumber": "43D-50",
+        "addr:street": "Calle 12",
+        "amenity": "restaurant",
+        "name": "Las Delicias De La Flaca",
+        "opening_hours": "Mo-Sa 18:00-23:00",
+        "website": "https://www.instagram.com/lasdeliciasdelaflaca/?igshid=Mzc0YWU1OWY%3D"
+      }
+    }
+  ],
+  "ELC_corner_calle7D_cra43C": [
+    {
+      "type": "node",
+      "id": 309027146,
+      "lat": 6.2089065,
+      "lon": -75.5728073
+    },
+    {
+      "type": "way",
+      "id": 28136150,
+      "tags": {
+        "highway": "residential",
+        "name": "Calle 7D",
+        "oneway": "yes",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "way",
+      "id": 34580281,
+      "tags": {
+        "highway": "secondary",
+        "lanes": "2",
+        "name": "Carrera 43C",
+        "oneway": "yes",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "way",
+      "id": 34580330,
+      "tags": {
+        "highway": "secondary",
+        "lanes": "2",
+        "name": "Carrera 43C",
+        "oneway": "yes",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "way",
+      "id": 34580589,
+      "tags": {
+        "highway": "tertiary",
+        "lanes": "2",
+        "name": "Carrera 43C",
+        "oneway": "yes",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "way",
+      "id": 34580593,
+      "tags": {
+        "highway": "tertiary",
+        "lanes": "1",
+        "name": "Carrera 43C",
+        "oneway": "yes",
+        "surface": "asphalt"
+      }
+    },
+    {
+      "type": "way",
+      "id": 34580597,
+      "tags": {
+        "highway": "tertiary",
+        "lanes": "2",
+        "name": "Carrera 43C",
+        "oneway": "no",
+        "surface": "asphalt"
+      }
+    }
+  ],
+  "ELC_named": [
+    {
+      "type": "node",
+      "id": 6334359685,
+      "lat": 6.2105925,
+      "lon": -75.5675951,
+      "tags": {
+        "addr:housenumber": "10A-22",
+        "addr:street": "Carrera 40",
+        "amenity": "restaurant",
+        "name": "El Cielo"
+      }
+    }
+  ],
+  "ELC_street_7D": [
+    {
+      "type": "way",
+      "id": 28136150,
+      "center": {
+        "lat": 6.2089028,
+        "lon": -75.5727792
+      },
+      "tags": {
+        "highway": "residential",
+        "name": "Calle 7D",
+        "oneway": "yes",
+        "surface": "asphalt"
+      }
+    }
+  ],
+  "C13_conveying": [
+    {
+      "type": "way",
+      "id": 406641200,
+      "center": {
+        "lat": 6.2483374,
+        "lon": -75.6219205
+      },
+      "tags": {
+        "conveying": "yes",
+        "highway": "steps",
+        "incline": "up",
+        "name:en": "Comuna 13 Escalator",
+        "name:es": "Escalatores Electricas de Comuna 13"
+      }
+    }
+  ],
+  "C13_attractions": [
+    {
+      "type": "node",
+      "id": 1647745842,
+      "lat": 6.2534254,
+      "lon": -75.6246966,
+      "tags": {
+        "name": "Biblioteca Comfenalco centro occidental",
+        "tourism": "artwork"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4890640221,
+      "lat": 6.2596723,
+      "lon": -75.6137617,
+      "tags": {
+        "name": "Andres gil",
+        "name:es": "Andres gil",
+        "tourism": "hotel"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5030723122,
+      "lat": 6.2505203,
+      "lon": -75.6213732,
+      "tags": {
+        "name:en": "Grafetti",
+        "tourism": "artwork"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11137525016,
+      "lat": 6.2528469,
+      "lon": -75.6149407,
+      "tags": {
+        "artwork_type": "statue",
+        "material": "stone",
+        "tourism": "artwork"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12986200107,
+      "lat": 6.2552763,
+      "lon": -75.6130433,
+      "tags": {
+        "board_type": "welcome_sign",
+        "information": "board",
+        "name": "Parque Biblioteca",
+        "tourism": "information"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12986485649,
+      "lat": 6.2543706,
+      "lon": -75.6110851,
+      "tags": {
+        "artwork_type": "statue",
+        "name": "Virgen",
+        "tourism": "artwork"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13121279795,
+      "lat": 6.2548513,
+      "lon": -75.6137262,
+      "tags": {
+        "alt_name": "PAZalobien ¡Comuna 13, territorio de artistas y gestores de paz!",
+        "artist_name": "Luis Jiménez",
+        "artwork_type": "sculpture",
+        "name": "Paz",
+        "panoramax": "cf2c82dc-8f4c-48b3-9aa2-ec2cac1fe81c",
+        "tourism": "artwork"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13125178761,
+      "lat": 6.2549331,
+      "lon": -75.6135633,
+      "tags": {
+        "artwork_type": "sculpture",
+        "tourism": "artwork"
+      }
+    },
+    {
+      "type": "way",
+      "id": 344885407,
+      "center": {
+        "lat": 6.2570881,
+        "lon": -75.6200526
+      },
+      "tags": {
+        "building": "yes",
+        "name": "Hotel Merlott",
+        "tourism": "hotel"
+      }
+    }
+  ],
+  "A_terminal": [
+    {
+      "type": "way",
+      "id": 35836493,
+      "center": {
+        "lat": 6.1713075,
+        "lon": -75.4283516
+      },
+      "tags": {
+        "addr:street": "Acceso Llegadas",
+        "aeroway": "terminal",
+        "building": "transportation",
+        "building:levels": "3",
+        "roof:levels": "0"
+      }
+    }
+  ],
+  "nominatim:Calle 12 43D-114, El Poblado, Medellín": [],
+  "nominatim:Carrera 43E 12-12, Medellín": [
+    {
+      "place_id": 309900577,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 34733133,
+      "lat": "6.2098281",
+      "lon": "-75.5740907",
+      "category": "highway",
+      "type": "residential",
+      "place_rank": 26,
+      "importance": 0.05340268177309831,
+      "addresstype": "road",
+      "name": "Carrera 43E",
+      "display_name": "Carrera 43E, Astorga, Comuna 14 - El Poblado, Perímetro Urbano Medellín, Medellín, Valle de Aburrá, Antioquia, RAP del Agua y la Montaña, 050003, Colombia",
+      "boundingbox": [
+        "6.2081811",
+        "6.2114523",
+        "-75.5742407",
+        "-75.5735246"
+      ]
+    },
+    {
+      "place_id": 310013249,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 197615626,
+      "lat": "6.2144715",
+      "lon": "-75.5725041",
+      "category": "highway",
+      "type": "residential",
+      "place_rank": 26,
+      "importance": 0.05340268177309831,
+      "addresstype": "road",
+      "name": "Carrera 43E",
+      "display_name": "Carrera 43E, Manila, Comuna 14 - El Poblado, Perímetro Urbano Medellín, Medellín, Valle de Aburrá, Antioquia, RAP del Agua y la Montaña, 050021, Colombia",
+      "boundingbox": [
+        "6.2139473",
+        "6.2149957",
+        "-75.5727026",
+        "-75.5723057"
+      ]
+    },
+    {
+      "place_id": 309878563,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 34687122,
+      "lat": "6.2070179",
+      "lon": "-75.5738107",
+      "category": "highway",
+      "type": "residential",
+      "place_rank": 26,
+      "importance": 0.05340268177309831,
+      "addresstype": "road",
+      "name": "Carrera 43E",
+      "display_name": "Carrera 43E, Patio Bonito, Comuna 14 - El Poblado, Perímetro Urbano Medellín, Medellín, Valle de Aburrá, Antioquia, RAP del Agua y la Montaña, 050003, Colombia",
+      "boundingbox": [
+        "6.2062712",
+        "6.2077664",
+        "-75.5739433",
+        "-75.5738008"
+      ]
+    }
+  ],
+  "nominatim:Calle 7D 43C-36, Medellín": [
+    {
+      "place_id": 309869719,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 28136150,
+      "lat": "6.2088967",
+      "lon": "-75.5727813",
+      "category": "highway",
+      "type": "residential",
+      "place_rank": 26,
+      "importance": 0.05340268177309831,
+      "addresstype": "road",
+      "name": "Calle 7D",
+      "display_name": "Calle 7D, Astorga, Comuna 14 - El Poblado, Perímetro Urbano Medellín, Medellín, Valle de Aburrá, Antioquia, RAP del Agua y la Montaña, 050003, Colombia",
+      "boundingbox": [
+        "6.2083717",
+        "6.2094339",
+        "-75.5742281",
+        "-75.5713302"
+      ]
+    }
+  ]
+}
