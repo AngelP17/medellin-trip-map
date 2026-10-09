@@ -237,3 +237,40 @@ if __name__ == "__main__":
     LOG["finished"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
     save(f"{OUT}/fetch-log.json", json.dumps(LOG, indent=2).encode())
     print(json.dumps(LOG["counts"]), "failures:", len(LOG["failures"]))
+
+
+def _overpass(q):
+    st, body = get("https://overpass-api.de/api/interpreter?" + urllib.parse.urlencode({"data": q}))
+    time.sleep(1.5)
+    if st != 200:
+        LOG["failures"].append({"kind": "overpass2", "status": st, "q": q[:120]})
+        return []
+    return json.loads(body).get("elements", [])
+
+
+def geocode2():
+    """Targeted lookups for stops the name search could not place."""
+    out = {}
+    pob = "6.195,-75.580,6.225,-75.555"  # El Poblado south of Calle 10
+    # Street intersections: nodes shared by two named streets
+    def corner(a, b):
+        q = (f'[out:json][timeout:60];way["highway"]["name"~"{a}"]({pob})->.a;'
+             f'way["highway"]["name"~"{b}"]({pob})->.b;node(w.a)(w.b);out;'
+             f'.a out tags 5;.b out tags 5;')
+        return _overpass(q)
+    out["H_corner_calle12_cra43D"] = corner("^Calle 12$", "^Carrera 43D$")
+    out["H_corner_calle12_cra43E"] = corner("^Calle 12$", "^Carrera 43E$")
+    out["H_named"] = _overpass(f'[out:json][timeout:60];nwr["name"~"[Ss][Ll][Oo][Hh]"](6.0,-75.8,6.5,-75.3);out center tags;')
+    out["H_addr"] = _overpass(f'[out:json][timeout:60];nwr["addr:street"~"Calle 12"]["addr:housenumber"~"43D"]({pob});out center tags;')
+    out["ELC_corner_calle7D_cra43C"] = corner("^Calle 7D$", "^Carrera 43C$")
+    out["ELC_named"] = _overpass(f'[out:json][timeout:60];nwr["name"~"[Ee]l ?[Cc]ielo"]({pob});out center tags;')
+    out["ELC_street_7D"] = _overpass(f'[out:json][timeout:60];way["highway"]["name"~"^Calle 7D$"]({pob});out center tags;')
+    out["C13_conveying"] = _overpass('[out:json][timeout:60];way["conveying"](6.245,-75.63,6.27,-75.60);out center tags;')
+    out["C13_attractions"] = _overpass('[out:json][timeout:60];nwr["tourism"](6.250,-75.625,6.262,-75.610);out center tags 40;')
+    out["A_terminal"] = _overpass('[out:json][timeout:60];nwr["aeroway"="terminal"](6.15,-75.44,6.18,-75.41);out center tags;')
+    for q in ["Calle 12 43D-114, El Poblado, Medellín", "Carrera 43E 12-12, Medellín", "Calle 7D 43C-36, Medellín"]:
+        url = "https://nominatim.openstreetmap.org/search?" + urllib.parse.urlencode({"q": q, "format": "jsonv2", "limit": 3, "countrycodes": "co"})
+        st, body = get(url)
+        time.sleep(1.2)
+        out["nominatim:" + q] = json.loads(body) if st == 200 else {"status": st}
+    save(f"{OUT}/geocode2.json", json.dumps(out, indent=2, ensure_ascii=False).encode())
