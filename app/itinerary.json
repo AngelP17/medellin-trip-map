@@ -1,0 +1,23 @@
+[
+  {"k":"wed","lab":"Wed Nov 25","title":"Arrive","lo":25,"hi":41,"route":["A","H"],"items":[
+    {"id":"A","label":"José María Córdova Airport","when":"Land 9:14 pm, flight P5 7049","cost":"Official airport taxi 132,000 COP (about $41). Uber or DiDi about $25 to $34.","note":"45 to 60 min to Poblado through the Túnel de Oriente. Use the white taxi queue outside arrivals, or pre-book a car."},
+    {"id":"H","label":"Sloh Hotel & Bar Manila","when":"Check in, late bite nearby","note":"Calle 12 #43D-114, Manila. Walkable base next to Provenza, full of restaurants."}
+  ]},
+  {"k":"thu","lab":"Thu Nov 26","title":"The city's story","lo":47,"hi":90,"route":["H","C13","MUS","H"],"items":[
+    {"id":"C13","label":"Comuna 13 graffiti tour","when":"Morning","cost":"Group tour about $14 to $32 each. Private from about $90 each. Tip your guide.","note":"Metro to San Javier. Pick a local-run group and book ahead."},
+    {"id":"MUS","label":"Plaza Botero and Museo de Antioquia","when":"Afternoon","cost":"30,000 to 40,000 COP each, about $19 to $25 for two. Sources differ.","note":"Be back in Poblado before dusk. Centro gets sketchy after dark."},
+    {"id":null,"label":"Dinner in Provenza","when":"Evening","note":"Dinner and rooftop drinks, walkable from the hotel. Use Uber or inDrive late at night."}
+  ]},
+  {"k":"fri","lab":"Fri Nov 27","title":"Guatapé","lo":232,"hi":334,"route":["H","PEN","H"],"items":[
+    {"id":"PEN","label":"Guatapé and El Peñol","when":"Leave around 7 am, about 2 h each way","cost":"Private vehicle $200 to $290 for two. Peñol entry 25,000 to 35,000 COP each, cash. Boat 25,000 to 35,000 COP each.","note":"740 steps. Get there before the tour buses. Treat salsa in Laureles as a bonus."}
+  ]},
+  {"k":"sat","lab":"Sat Nov 28","title":"Mountains and the big night","lo":472,"hi":782,"route":["H","ARV","PAI","ELC"],"items":[
+    {"id":"ARV","label":"Parque Arví","when":"Morning, leave by about 9 am","cost":"Park entry is free. Metro and cable about 25,000 to 35,000 COP each round trip, trail tickets extra. About $30 to $50 for two.","note":"Metro A, Cable K, then Cable L. Roughly 1.5 h each way."},
+    {"id":"PAI","label":"Pueblito Paisa","when":"Sunset","cost":"Free","note":"Taxi up from the base is about 10,000 to 15,000 COP."},
+    {"id":"ELC","label":"Dinner at El Cielo","when":"Evening, book ahead","cost":"The Experience 700,000 COP each (about $218). Wine pairing +330,000 or +460,000 COP each. About $436 for two, $642 to $723 with wine.","note":"Calle 7D #43C-36, El Poblado. Book now, Saturday slots go first."}
+  ]},
+  {"k":"sun","lab":"Sun Nov 29","title":"Fly home","lo":25,"hi":41,"route":["H","BOT","A"],"items":[
+    {"id":"BOT","label":"Jardín Botánico","when":"Morning","cost":"Free","note":"Bring passports, the entrance checks ID. Open Tuesday to Sunday."},
+    {"id":"A","label":"Back to the airport","when":"Leave the hotel around 2:30 pm for the 5:49 pm flight (P5 7048)","cost":"Same fare as arrival, about $41 by taxi.","note":"Check your Wingo fare. The cheapest one covers only a small personal item."}
+  ]}
+]

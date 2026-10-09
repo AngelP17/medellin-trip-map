@@ -1,0 +1,514 @@
+<title>Medellín Trip Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap">
+<style>/*MAPLIBRE_CSS*/</style>
+<style>
+/* Layout: the real-terrain map is the page. Controls float on it; details and the day list sit underneath. */
+:root{
+  --bg:#EDF3EE; --panel:#F8FBF8; --ink:#12241B; --muted:#4F6459; --line:#C6D5CB; --accent:#0E6A50; --on-accent:#FFFFFF;
+  --wed:#2F5F9E; --thu:#B0306A; --fri:#137F7A; --sat:#A65F08; --sun-day:#3F7A25; --base:#12241B;
+  --bad:#B42318;
+  --font-display:"Bricolage Grotesque","Avenir Next",system-ui,sans-serif;
+  --font-body:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-mono:"Spline Sans Mono",ui-monospace,"SF Mono",Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1914; --panel:#15241C; --ink:#E4EFE8; --muted:#98B0A3; --line:#284035; --accent:#5CCFA6; --on-accent:#0A140F;
+    --wed:#7FAAE8; --thu:#F27DAE; --fri:#4FD2CA; --sat:#F2A64E; --sun-day:#8CD15F; --base:#E4EFE8; --bad:#FF8A7A;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1914; --panel:#15241C; --ink:#E4EFE8; --muted:#98B0A3; --line:#284035; --accent:#5CCFA6; --on-accent:#0A140F;
+  --wed:#7FAAE8; --thu:#F27DAE; --fri:#4FD2CA; --sat:#F2A64E; --sun-day:#8CD15F; --base:#E4EFE8; --bad:#FF8A7A;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:15px;line-height:1.5}
+.wrap{max-width:1280px;margin-inline:auto;padding-inline:16px;padding-block:18px 48px}
+header{display:grid;gap:4px;margin-bottom:12px}
+.eyebrow{font:500 12px/1.2 var(--font-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+h1{font:700 clamp(2rem,6.5vw,3.1rem)/1 var(--font-display);margin:0;letter-spacing:-.015em;text-wrap:balance}
+.sub{margin:0;color:var(--muted);max-width:70ch}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.chip,.tool{font:600 13px var(--font-body);min-height:40px;padding:0 14px;border:1px solid var(--line);border-radius:999px;background:var(--panel);color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--c);flex:none}
+button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+.stage{position:relative;height:clamp(460px,74vh,820px);border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--panel)}
+#map{position:absolute;inset:0}
+.hud{position:absolute;left:10px;top:10px;display:flex;flex-wrap:wrap;gap:6px;max-width:calc(100% - 70px);z-index:3}
+.tool{min-height:38px;padding:0 13px;background:color-mix(in srgb,var(--panel) 92%,transparent);backdrop-filter:blur(6px)}
+.tool.primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.tool[disabled]{opacity:.5;cursor:not-allowed}
+.tool svg{width:14px;height:14px;fill:currentColor}
+.speed{font:600 13px var(--font-body);min-height:38px;border:1px solid var(--line);border-radius:999px;background:color-mix(in srgb,var(--panel) 92%,transparent);color:var(--ink);padding:0 10px}
+.caption{position:absolute;left:12px;bottom:34px;right:12px;z-index:3;pointer-events:none;display:grid;gap:2px;max-width:min(520px,calc(100% - 24px))}
+.caption .k{font:500 11.5px var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.caption .t{font:700 clamp(1.15rem,3.6vw,1.6rem)/1.15 var(--font-display)}
+.caption .box{background:color-mix(in srgb,var(--panel) 88%,transparent);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:14px;padding:10px 14px;display:grid;gap:2px}
+.caption[hidden]{display:none}
+.progress{position:absolute;left:0;right:0;bottom:0;height:3px;background:transparent;z-index:3}
+.progress i{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
+.overlay{position:absolute;inset:0;z-index:4;display:grid;place-items:center;background:color-mix(in srgb,var(--panel) 82%,transparent);backdrop-filter:blur(3px);padding:24px;text-align:center}
+.overlay .in{display:grid;gap:8px;justify-items:center;max-width:44ch}
+.overlay .spin{width:28px;height:28px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--accent);animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.overlay .spin{animation:none}}
+.banner{position:absolute;left:10px;right:10px;top:58px;z-index:4;border:1px solid var(--bad);color:var(--ink);background:color-mix(in srgb,var(--panel) 94%,transparent);border-radius:12px;padding:8px 12px;font-size:13px;display:flex;gap:8px;align-items:flex-start}
+.banner::before{content:"";flex:none;width:8px;height:8px;margin-top:6px;border-radius:50%;background:var(--bad)}
+/* selected-stop marker */
+.pulse{width:22px;height:22px;border-radius:50%;background:var(--c);border:3px solid var(--panel);box-shadow:0 2px 8px rgba(0,0,0,.35);position:relative}
+.pulse::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:2px solid var(--c);animation:ring 1.8s ease-out infinite}
+@keyframes ring{from{transform:scale(.6);opacity:.9}to{transform:scale(1.7);opacity:0}}
+@media (prefers-reduced-motion:reduce){.pulse::after{animation:none;opacity:.5}}
+.maplibregl-ctrl-attrib{font-size:11px}
+
+.below{display:grid;gap:20px;margin-top:16px;grid-template-columns:minmax(0,1fr)}
+@media (min-width:900px){.below{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);align-items:start}}
+.card{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:14px 16px;display:grid;gap:6px}
+.card h2{margin:0;font:700 1.25rem/1.2 var(--font-display)}
+.when{color:var(--muted);font-size:13px}
+.cost{font:400 12.5px/1.55 var(--font-mono)}
+.note{margin:0}
+.card a{color:var(--accent);font-weight:600;justify-self:start}
+.days{display:grid;gap:16px}
+.day h3{display:flex;align-items:center;gap:8px;margin:0 0 4px;font:700 1.02rem var(--font-display)}
+.day h3 small{font:500 12px var(--font-mono);color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.day h3 .dc{margin-left:auto;font:400 12.5px var(--font-mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.row{display:grid;grid-template-columns:30px minmax(0,1fr);gap:10px;width:100%;text-align:left;border:1px solid transparent;border-radius:12px;padding:8px;background:transparent;color:var(--ink);font:inherit}
+button.row{cursor:pointer}
+button.row:hover{background:var(--panel)}
+.row[aria-current="true"]{background:var(--panel);border-color:var(--accent)}
+.badge{width:28px;height:28px;border-radius:50%;background:var(--c);color:var(--on-accent);display:grid;place-items:center;font:700 12px var(--font-body)}
+.badge.sq{border-radius:8px}
+.badge.none{background:transparent;border:1.5px dashed var(--line)}
+.rt{font-weight:600;display:block}
+.rw{color:var(--muted);font-size:13px;display:block}
+.total{margin-top:18px;border-top:1px solid var(--line);padding-top:14px;display:grid;gap:4px}
+.total .big{font:700 1.7rem/1.1 var(--font-display)}
+.total p{margin:0;color:var(--muted);font-size:13px}
+.budget{display:grid;gap:2px;margin-block:6px 8px}
+.brow{display:grid;grid-template-columns:40px minmax(0,1fr) 104px;align-items:center;gap:10px;min-height:36px;border:1px solid transparent;border-radius:10px;padding:2px 8px;background:transparent;color:var(--ink);font:inherit;cursor:pointer;text-align:left}
+.brow:hover{background:var(--panel)}
+.brow[aria-pressed="true"]{border-color:var(--accent);background:var(--panel)}
+.bl{font:600 13px var(--font-body)}
+.bt{position:relative;height:12px;border-radius:6px;background:color-mix(in srgb,var(--line) 55%,transparent)}
+.blo,.bhi{position:absolute;top:0;bottom:0;border-radius:6px;background:var(--c)}
+.bhi{opacity:.38}
+.bv{font:400 12.5px var(--font-mono);font-variant-numeric:tabular-nums;color:var(--muted);text-align:right}
+.dashlink{color:var(--accent);font-weight:600;justify-self:start;margin-top:4px}
+details{margin-top:14px;font-size:13px;color:var(--muted)}
+summary{cursor:pointer;min-height:32px;display:flex;align-items:center}
+details ul{margin:6px 0 0;padding-left:18px;display:grid;gap:4px}
+details a{color:var(--accent)}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Nov 25 to 29, 2026 · Colombia</div>
+    <h1>Medellín in five days</h1>
+    <p class="sub">Real terrain and OpenStreetMap data from the Aburrá valley out to the Peñol-Guatapé reservoir. Base is Sloh Hotel &amp; Bar Manila in El Poblado. Prices are for two at about 3,210 COP per USD (Oct 6).</p>
+  </header>
+
+  <div class="chips" id="chips" role="group" aria-label="Filter by day"></div>
+
+  <div class="stage" id="stage">
+    <div id="map" role="region" aria-label="3D map of Medellín, the Aburrá valley and Guatapé with trip stops. The stop list below the map selects stops too."></div>
+    <div class="hud">
+      <button type="button" class="tool primary" id="play" disabled><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg><span>Play the trip</span></button>
+      <button type="button" class="tool" id="restart" disabled aria-label="Restart the trip"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3a5 5 0 1 1-4.9 6h1.6A3.5 3.5 0 1 0 8 4.5V7L4.5 3.75 8 .5z"/></svg>Restart</button>
+      <label class="sr" style="position:absolute;left:-9999px" for="speed">Playback speed</label>
+      <select class="speed" id="speed" disabled><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="1.5">1.5x</option><option value="2">2x</option></select>
+      <button type="button" class="tool" id="region" disabled>Whole region</button>
+    </div>
+    <div class="caption" id="caption" hidden><div class="box"><span class="k" id="capk"></span><span class="t" id="capt"></span></div></div>
+    <div class="progress" aria-hidden="true"><i id="prog"></i></div>
+    <div class="overlay" id="overlay"><div class="in"><div class="spin" aria-hidden="true"></div><strong id="loadt">Loading real terrain and map data</strong><span class="when" id="loads">Elevation, streets, water and buildings for Medellín to Guatapé</span></div></div>
+  </div>
+
+  <div class="below">
+    <div>
+      <div class="card" id="card" aria-live="polite"></div>
+      <div class="total">
+        <div class="big">About $800 to $1,300</div>
+        <p>Rough total for two before hotel, flights and meals. El Cielo is more than half of it. Tap a day to fly there.</p>
+        <div class="budget" id="budget" role="group" aria-label="Cost by day"></div>
+        <a class="dashlink" href="https://claude.ai/artifact/3bbrMe6tmomdZ81yYV99d5" target="_blank" rel="noopener noreferrer">Open the full budget with every line item and source</a>
+      </div>
+      <details>
+        <summary>Map data and price sources</summary>
+        <ul id="srcs">
+          <li id="dataSrc">Map data loads with the page.</li>
+          <li><a href="https://www.getyourguide.com/comuna-13-l114577/" target="_blank" rel="noopener noreferrer">GetYourGuide, Comuna 13 tours</a></li>
+          <li><a href="https://www.getyourguide.com/guatape-l114702/private-car-tours-tc5/" target="_blank" rel="noopener noreferrer">GetYourGuide, Guatapé private tours</a></li>
+          <li><a href="https://latidostoursmedellin.com/en/guides/piedra-del-penol-tickets-and-climb/" target="_blank" rel="noopener noreferrer">Latidos, Piedra del Peñol</a></li>
+          <li><a href="https://elcielo.com.co/medellin/the-experience/" target="_blank" rel="noopener noreferrer">Elcielo Medellín, The Experience</a></li>
+          <li><a href="https://safetransferscolombia.com/medellin-airport-guide/" target="_blank" rel="noopener noreferrer">Safe Transfers, MDE guide</a></li>
+          <li><a href="https://www.tripadvisor.com/Attraction_Review-g297478-d7379806-Reviews-or30-Parque_Arvi-Medellin_Antioquia_Department.html" target="_blank" rel="noopener noreferrer">Tripadvisor, Parque Arví</a></li>
+          <li><a href="https://regiones.prisamedia.co/2023/05/17/cuanto-cuesta-la-entrada-al-museo-de-antioquia-obras-horarios-y-lo-que-debe-saber/" target="_blank" rel="noopener noreferrer">Prisa Media, Museo de Antioquia</a></li>
+          <li><a href="https://www.botanicomedellin.org/contactanos/preguntas-frecuentes/" target="_blank" rel="noopener noreferrer">Jardín Botánico FAQ</a></li>
+        </ul>
+      </details>
+    </div>
+    <div class="days" id="days" aria-label="Itinerary"></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/maplibre-gl@5.24.0/dist/maplibre-gl.js"></script>
+<script>
+/*TRIP_DATA*/
+</script>
+<script>
+(function(){
+"use strict";
+var D=window.TRIP; /* {stops, days, routes, region, packIndex, style, attribution, themePatch} */
+var STOPS=D.stops, DAYS=D.days;
+var DAYTOK={wed:"--wed",thu:"--thu",fri:"--fri",sat:"--sat",sun:"--sun-day",base:"--base"};
+var reduced=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+function $(s){return document.querySelector(s)}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;")}
+function tok(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()}
+function isDark(){var t=document.documentElement.getAttribute("data-theme");if(t)return t==="dark";return !!(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)}
+var ALL=[];
+DAYS.forEach(function(d){d.items.forEach(function(it,i){var o={};for(var k in it)o[k]=it[k];o.dk=d.k;o.key=d.k+":"+i;ALL.push(o)})});
+var state={day:"all",sel:"wed:1"};
+function byKey(k){return ALL.filter(function(i){return i.key===k})[0]}
+function dayOf(k){return DAYS.filter(function(d){return d.k===k})[0]}
+function vis(){return state.day==="all"?ALL:ALL.filter(function(i){return i.dk===state.day})}
+
+/* ---------- local tile packs (real data shipped with the page) ---------- */
+var BASE=location.href.replace(/[#?].*$/,"").replace(/[^/]*$/,"");
+var bins={},failures={terrain:0,vector:0,other:0,bins:0},loadedBins=0;
+function loadBin(name){
+  if(!bins[name]){
+    bins[name]=fetch(BASE+"data/"+name).then(function(r){if(!r.ok)throw new Error(name+" "+r.status);return r.arrayBuffer()})
+      .then(function(b){loadedBins++;return b})
+      .catch(function(e){failures.bins++;showBanner();throw e});
+  }
+  return bins[name];
+}
+maplibregl.addProtocol("trip",function(params){
+  var path=decodeURIComponent(params.url.slice(7)).replace(/\.(pbf|webp|png|json)$/,function(m){return m});
+  var ent=D.packIndex[path];
+  if(!ent){
+    if(path.indexOf("vector/")===0)return Promise.resolve({data:new ArrayBuffer(0)});
+    if(path.indexOf("terrain/")===0){failures.terrain++;showBanner()}else failures.other++;
+    return Promise.reject(new Error("Not in data pack: "+path));
+  }
+  return loadBin(ent[0]).then(function(buf){
+    var slice=buf.slice(ent[1],ent[1]+ent[2]);
+    if(path.slice(-5)===".json")return {data:JSON.parse(new TextDecoder().decode(slice))};
+    return {data:slice};
+  });
+});
+function showBanner(){
+  var el=$("#banner");
+  var parts=[];
+  if(failures.bins)parts.push(failures.bins+" map data file"+(failures.bins>1?"s":"")+" didn’t download");
+  if(failures.terrain)parts.push(failures.terrain+" terrain tile"+(failures.terrain>1?"s are":" is")+" missing");
+  if(!parts.length)return;
+  if(!el){el=document.createElement("div");el.className="banner";el.id="banner";el.setAttribute("role","status");$("#stage").appendChild(el)}
+  el.textContent=parts.join(" and ")+". Those areas stay blank rather than showing made-up terrain. Reload to try again.";
+}
+
+/* ---------- map ---------- */
+var map=null,selMarker=null;
+function stopFC(){
+  return {type:"FeatureCollection",features:Object.keys(STOPS).map(function(id){var s=STOPS[id];return {type:"Feature",id:idx(id),properties:{id:id,short:s.short,day:s.day,mark:s.mark},geometry:{type:"Point",coordinates:[s.lng,s.lat]}}})};
+}
+function idx(id){return Object.keys(STOPS).indexOf(id)+1}
+function dayColorExpr(prop){
+  return ["match",["get",prop],"wed",tok("--wed"),"thu",tok("--thu"),"fri",tok("--fri"),"sat",tok("--sat"),"sun",tok("--sun-day"),tok("--base")];
+}
+function applyTheme(){
+  if(!map||!map.getLayer("stops-dot"))return;
+  var dark=isDark(),P=D.themePatch;
+  Object.keys(P).forEach(function(layer){
+    if(!map.getLayer(layer))return;
+    var props=P[layer];
+    Object.keys(props).forEach(function(prop){try{map.setPaintProperty(layer,prop,props[prop][dark?1:0])}catch(e){}});
+  });
+  ["routes-line","route-anim"].forEach(function(l){if(map.getLayer(l))map.setPaintProperty(l,"line-color",dayColorExpr("day"))});
+  if(map.getLayer("stops-dot"))map.setPaintProperty("stops-dot","circle-color",dayColorExpr("day"));
+  var halo=tok("--panel"),ink=tok("--ink");
+  if(map.getLayer("stops-dot"))map.setPaintProperty("stops-dot","circle-stroke-color",halo);
+  if(map.getLayer("routes-casing"))map.setPaintProperty("routes-casing","line-color",halo);
+  if(map.getLayer("stops-label")){map.setPaintProperty("stops-label","text-color",ink);map.setPaintProperty("stops-label","text-halo-color",halo)}
+  map.setSky(dark?D.sky.dark:D.sky.light);
+  if(selMarker)selMarker.getElement().firstChild.style.setProperty("--c","var("+DAYTOK[STOPS[curStop()].day]+")");
+}
+function curStop(){var it=byKey(state.sel);return it&&it.id}
+function emphasis(){
+  if(!map||!map.getLayer("routes-line"))return;
+  var d=state.day;
+  var op=d==="all"?0.9:["case",["==",["get","day"],d],1,0.12];
+  map.setPaintProperty("routes-line","line-opacity",op);
+  map.setPaintProperty("routes-casing","line-opacity",d==="all"?0.8:["case",["==",["get","day"],d],0.9,0]);
+  var active=d==="all"?null:dayOf(d).route;
+  map.setPaintProperty("stops-dot","circle-opacity",active?["case",["in",["get","id"],["literal",active]],1,0.35]:1);
+  map.setPaintProperty("stops-dot","circle-stroke-opacity",active?["case",["in",["get","id"],["literal",active]],1,0.35]:1);
+  map.setPaintProperty("stops-label","text-opacity",active?["case",["in",["get","id"],["literal",active]],1,0.45]:1);
+  var sid=curStop();
+  map.setLayoutProperty("stops-label","symbol-sort-key",["case",["==",["get","id"],sid||""],0,active?["case",["in",["get","id"],["literal",active]],1,2]:1]);
+  placeSelMarker();
+}
+function placeSelMarker(){
+  var id=curStop();
+  if(!id){if(selMarker){selMarker.remove();selMarker=null}return}
+  var s=STOPS[id];
+  if(!selMarker){
+    var el=document.createElement("div");var p=document.createElement("div");p.className="pulse";el.appendChild(p);
+    selMarker=new maplibregl.Marker({element:el,anchor:"center"});
+  }
+  selMarker.getElement().firstChild.style.setProperty("--c","var("+DAYTOK[s.day]+")");
+  selMarker.setLngLat([s.lng,s.lat]).addTo(map);
+}
+function stageNarrow(){return $("#stage").clientWidth<640}
+function pad(){var n=stageNarrow();return {top:n?96:70,bottom:n?110:90,left:n?54:60,right:n?54:60}}
+var CAM=D.cameras;
+function stopCam(id){
+  var s=STOPS[id],c=CAM.stops[id]||{};
+  return {center:[s.lng,s.lat],zoom:(c.zoom||15.3)-(stageNarrow()?0.6:0),pitch:c.pitch!=null?c.pitch:62,bearing:c.bearing!=null?c.bearing:-18};
+}
+function boundsOf(ids){var b=new maplibregl.LngLatBounds();ids.forEach(function(id){b.extend([STOPS[id].lng,STOPS[id].lat])});return b}
+function bearingFor(ids,def){
+  if(!stageNarrow())return def;
+  var b=boundsOf(ids),w=(b.getEast()-b.getWest())*0.995,h=b.getNorth()-b.getSouth();
+  return w>h*1.25?84:def;
+}
+function dayCam(k){
+  var d=dayOf(k),br=bearingFor(d.route,CAM.dayBearing[k]||-15);
+  var cam=map.cameraForBounds(boundsOf(d.route),{padding:pad(),pitch:55,bearing:br});
+  cam.pitch=55;cam.bearing=br;cam.zoom=Math.min(cam.zoom,14.6);return cam;
+}
+function regionCam(){
+  var ids=Object.keys(STOPS),br=bearingFor(ids,-14);
+  var cam=map.cameraForBounds(boundsOf(ids),{padding:pad(),pitch:50,bearing:br});
+  cam.pitch=50;cam.bearing=br;cam.zoom=Math.max(cam.zoom,D.minZoom+0.15);return cam;
+}
+function valleyCam(){var v=CAM.valley;return {center:v.center,zoom:v.zoom-(stageNarrow()?0.7:0),pitch:v.pitch,bearing:v.bearing}}
+function fly(cam,ms){
+  if(!map)return;
+  if(reduced||ms===0){map.jumpTo(cam);return}
+  map.flyTo(Object.assign({},cam,{duration:ms,curve:1.3,essential:true,easing:function(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}}));
+}
+
+function initMap(){
+  var style=D.style;
+  map=new maplibregl.Map({container:"map",style:style,center:CAM.valley.center,zoom:CAM.valley.zoom-1,pitch:45,bearing:-12,
+    maxPitch:76,minZoom:D.minZoom,maxBounds:[[D.dataBounds[0],D.dataBounds[1]],[D.dataBounds[2],D.dataBounds[3]]],
+    attributionControl:false,cooperativeGestures:false,fadeDuration:200,maxTileCacheZoomLevels:6});
+  /* MapLibre can leave the camera under freshly loaded terrain after a flight, which draws a blank frame until the next move. A sub-pixel nudge once tiles settle re-solves camera elevation. */
+  var nudging=false,settling=false;
+  map.on("moveend",function(){
+    if(nudging||settling)return;settling=true;
+    map.once("idle",function(){settling=false;if(map.isMoving())return;nudging=true;try{map.jumpTo({bearing:map.getBearing()+0.0004})}finally{nudging=false}});
+  });
+  map.on("styleimagemissing",function(e){if(!map.hasImage(e.id))map.addImage(e.id,{width:1,height:1,data:new Uint8Array(4)})});
+  map.addControl(new maplibregl.NavigationControl({visualizePitch:true,showCompass:true}),"top-right");
+  map.addControl(new maplibregl.AttributionControl({compact:true,customAttribution:D.attribution}),"bottom-right");
+  map.addControl(new maplibregl.ScaleControl({maxWidth:90,unit:"metric"}),"bottom-left");
+  map.on("load",function(){
+    map.addSource("terrain-dem",D.demSource);
+    map.addSource("hillshade-dem",D.demSource);
+    map.setTerrain({source:"terrain-dem",exaggeration:D.exaggeration});
+    var first=D.hillshadeBefore&&map.getLayer(D.hillshadeBefore)?D.hillshadeBefore:undefined;
+    map.addLayer({id:"hillshade",type:"hillshade",source:"hillshade-dem",paint:{"hillshade-exaggeration":0.55,"hillshade-shadow-color":"#24332b","hillshade-highlight-color":"#ffffff","hillshade-accent-color":"#3d5747","hillshade-illumination-direction":315}},first);
+    map.addSource("routes",{type:"geojson",data:D.routes,lineMetrics:true});
+    map.addSource("route-anim",{type:"geojson",data:{type:"FeatureCollection",features:[]}});
+    map.addSource("stops",{type:"geojson",data:stopFC()});
+    map.addLayer({id:"routes-casing",type:"line",source:"routes",layout:{"line-cap":"round","line-join":"round"},paint:{"line-color":"#fff","line-width":["interpolate",["linear"],["zoom"],9,3,14,8],"line-opacity":0.8}});
+    map.addLayer({id:"routes-line",type:"line",source:"routes",layout:{"line-cap":"round","line-join":"round"},paint:{"line-color":"#888","line-width":["interpolate",["linear"],["zoom"],9,1.6,14,4.5]}});
+    map.addLayer({id:"route-anim",type:"line",source:"route-anim",layout:{"line-cap":"round","line-join":"round"},paint:{"line-color":"#888","line-width":["interpolate",["linear"],["zoom"],9,3.5,14,7],"line-blur":0.5}});
+    map.addLayer({id:"stops-dot",type:"circle",source:"stops",paint:{"circle-radius":["interpolate",["linear"],["zoom"],9,5,15,8],"circle-color":"#888","circle-stroke-width":2.5,"circle-stroke-color":"#fff","circle-pitch-alignment":"map"}});
+    map.addLayer({id:"stops-label",type:"symbol",source:"stops",layout:{"text-field":["get","short"],"text-font":D.labelFont,"text-size":["interpolate",["linear"],["zoom"],9,12,15,14.5],"text-variable-anchor":["top","bottom","left","right","top-left","top-right"],"text-radial-offset":1.05,"text-justify":"auto","symbol-sort-key":1,"text-padding":3},paint:{"text-color":"#111","text-halo-color":"#fff","text-halo-width":2,"text-halo-blur":0.4}});
+    map.on("click","stops-dot",function(e){var f=e.features&&e.features[0];if(f){stopPlay();pickStop(f.properties.id,true)}});
+    map.on("click","stops-label",function(e){var f=e.features&&e.features[0];if(f){stopPlay();pickStop(f.properties.id,true)}});
+    ["stops-dot","stops-label"].forEach(function(l){map.on("mouseenter",l,function(){map.getCanvas().style.cursor="pointer"});map.on("mouseleave",l,function(){map.getCanvas().style.cursor=""})});
+    applyTheme();emphasis();
+    fly(valleyCam(),reduced?0:2600);
+  });
+  var firstIdle=true;
+  map.on("idle",function(){
+    if(!firstIdle)return;firstIdle=false;
+    $("#overlay").hidden=true;
+    ["play","restart","speed","region"].forEach(function(id){$("#"+id).disabled=false});
+  });
+  map.on("error",function(e){
+    var m=e&&e.error&&e.error.message||"";
+    if(/terrain|dem/i.test(m)){failures.terrain++;showBanner()}
+  });
+  map.on("dragstart",stopPlayIfUser);map.on("wheel",stopPlayIfUser);map.on("touchstart",stopPlayIfUser);
+  try{matchMedia("(prefers-color-scheme: dark)").addEventListener("change",applyTheme)}catch(e){}
+  new MutationObserver(applyTheme).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
+  setTimeout(function(){
+    if(!$("#overlay").hidden){$("#loadt").textContent="Still loading map data";$("#loads").textContent="The terrain and street data is about "+D.packMB+" MB. On a slow connection this can take a minute."}
+  },12000);
+}
+function stopPlayIfUser(e){if(e&&e.originalEvent&&player.state==="playing")pause()}
+
+/* ---------- itinerary UI ---------- */
+function mapsLink(q){return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q)}
+function money(n){return "$"+n.toLocaleString("en-US")}
+function cardHtml(){
+  var it=byKey(state.sel);if(!it)return"";
+  var s=it.id?STOPS[it.id]:null,d=dayOf(it.dk);
+  var h='<div class="when">'+d.lab+' · '+esc(d.title)+'</div><h2>'+esc(it.label)+'</h2><div class="when">'+esc(it.when)+'</div>';
+  if(s&&s.elev)h+='<div class="when">Ground elevation about '+s.elev.toLocaleString("en-US")+' m in the terrain data · '+s.lat.toFixed(4)+', '+s.lng.toFixed(4)+'</div>';
+  if(it.cost)h+='<div class="cost">'+esc(it.cost)+'</div>';
+  if(it.note)h+='<p class="note">'+esc(it.note)+'</p>';
+  if(s)h+='<a href="'+esc(mapsLink(s.q))+'" target="_blank" rel="noopener noreferrer">Open in Google Maps</a>';
+  return h;
+}
+function listHtml(){
+  var out="";
+  DAYS.filter(function(d){return state.day==="all"||d.k===state.day}).forEach(function(d){
+    out+='<div class="day" style="--c:var('+DAYTOK[d.k]+')"><h3><span class="dot"></span>'+d.lab+' <small>'+esc(d.title)+'</small><span class="dc">'+money(d.lo)+' to '+money(d.hi)+'</span></h3>';
+    ALL.filter(function(i){return i.dk===d.k}).forEach(function(it){
+      var s=it.id?STOPS[it.id]:null;
+      var inner='<span class="badge'+(it.id==="H"?" sq":"")+(s?"":" none")+'"'+(s?' style="--c:var('+DAYTOK[s.day]+')"':"")+'>'+(s?s.mark:"")+'</span><span><span class="rt">'+esc(it.label)+'</span><span class="rw">'+esc(it.when)+'</span></span>';
+      if(s)out+='<button type="button" class="row" data-key="'+it.key+'" id="r-'+it.key.replace(":","-")+'"'+(state.sel===it.key?' aria-current="true"':"")+'>'+inner+'</button>';
+      else out+='<div class="row">'+inner+'</div>';
+    });
+    out+='</div>';
+  });
+  return out;
+}
+function chipsHtml(){
+  var h='<button type="button" class="chip" data-day="all" id="d-all" aria-pressed="'+(state.day==="all")+'">All days</button>';
+  DAYS.forEach(function(d){h+='<button type="button" class="chip" data-day="'+d.k+'" id="d-'+d.k+'" aria-pressed="'+(state.day===d.k)+'" style="--c:var('+DAYTOK[d.k]+')"><span class="dot"></span>'+d.lab.split(" ")[0]+'</button>'});
+  return h;
+}
+function budgetHtml(){
+  var max=Math.max.apply(null,DAYS.map(function(d){return d.hi}));
+  return DAYS.map(function(d){
+    var lo=(d.lo/max*100).toFixed(2),hi=((d.hi-d.lo)/max*100).toFixed(2);
+    return '<button type="button" class="brow" data-day="'+d.k+'" id="b-'+d.k+'" aria-pressed="'+(state.day===d.k)+'" style="--c:var('+DAYTOK[d.k]+')" aria-label="'+d.lab+', '+money(d.lo)+' to '+money(d.hi)+'"><span class="bl">'+d.lab.split(" ")[0]+'</span><span class="bt"><span class="blo" style="width:'+lo+'%"></span><span class="bhi" style="left:'+lo+'%;width:'+hi+'%"></span></span><span class="bv">'+money(d.lo)+' to '+money(d.hi)+'</span></button>';
+  }).join("");
+}
+function renderUI(focusId){
+  $("#budget").innerHTML=budgetHtml();$("#chips").innerHTML=chipsHtml();$("#card").innerHTML=cardHtml();$("#days").innerHTML=listHtml();
+  emphasis();
+  if(focusId){var n=document.getElementById(focusId);if(n)n.focus({preventScroll:true})}
+}
+function showStage(){var r=$("#stage").getBoundingClientRect();if(r.bottom<120||r.top>window.innerHeight-120)$("#stage").scrollIntoView({behavior:reduced?"auto":"smooth",block:"start"})}
+function pick(key,flyThere){
+  state.sel=key;var it=byKey(key);
+  if(state.day!=="all"&&it.dk!==state.day)state.day=it.dk;
+  if(flyThere&&it.id&&map)fly(stopCam(it.id),2200);
+}
+function pickStop(id,flyThere){
+  var it=vis().filter(function(i){return i.id===id})[0]||ALL.filter(function(i){return i.id===id})[0];
+  if(it){pick(it.key,flyThere);renderUI()}
+}
+function setDay(k){
+  state.day=k;
+  var v=vis(),cur=byKey(state.sel);
+  if(!(cur&&cur.id&&v.indexOf(cur)>-1)){var f=v.filter(function(i){return i.id&&i.id!=="H"})[0]||v.filter(function(i){return i.id})[0];if(f)state.sel=f.key}
+  if(map)fly(k==="all"?regionCam():dayCam(k),2400);
+}
+document.addEventListener("click",function(e){
+  var c=e.target.closest&&e.target.closest("[data-day]");
+  if(c){stopPlay();setDay(c.getAttribute("data-day"));renderUI(c.id);showStage();return}
+  var r=e.target.closest&&e.target.closest("[data-key]");
+  if(r){stopPlay();pick(r.getAttribute("data-key"),true);renderUI(r.id);showStage()}
+});
+$("#region").addEventListener("click",function(){stopPlay();state.day="all";fly(regionCam(),2600);renderUI("region")});
+
+/* ---------- cinematic playback ---------- */
+var player={state:"idle",i:0,token:0,speed:1,steps:[]};
+function legGeom(day,a,b){var f=D.routes.features.filter(function(x){return x.properties.day===day&&x.properties.from===a&&x.properties.to===b})[0];return f}
+function caption(k,t){if(!k){$("#caption").hidden=true;return}$("#capk").textContent=k;$("#capt").textContent=t;$("#caption").hidden=false}
+function wait(ms,tk){return new Promise(function(res){setTimeout(function(){res(tk===player.token)},reduced?Math.min(ms,1200):ms/player.speed)})}
+function flyStep(cam,ms,tk){
+  return new Promise(function(res){
+    if(tk!==player.token)return res(false);
+    if(reduced){map.jumpTo(cam);return res(true)}
+    var done=false;function end(){if(done)return;done=true;map.off("moveend",end);res(tk===player.token)}
+    map.on("moveend",end);
+    map.flyTo(Object.assign({},cam,{duration:ms/player.speed,curve:1.25,essential:true,easing:function(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}}));
+    setTimeout(end,ms/player.speed+1500);
+  });
+}
+function animateLeg(f,ms,tk){
+  var src=map.getSource("route-anim");if(!f||!src)return;
+  var coords=f.geometry.coordinates,n=coords.length,t0=performance.now(),dur=reduced?0:ms/player.speed;
+  function frame(now){
+    if(tk!==player.token)return;
+    var k=dur?Math.min(1,(now-t0)/dur):1,m=Math.max(2,Math.round(n*k));
+    src.setData({type:"FeatureCollection",features:[{type:"Feature",properties:{day:f.properties.day},geometry:{type:"LineString",coordinates:coords.slice(0,m)}}]});
+    if(k<1)requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+function clearAnim(){var s=map&&map.getSource("route-anim");if(s)s.setData({type:"FeatureCollection",features:[]})}
+var DAYNAME={wed:"Wednesday",thu:"Thursday",fri:"Friday",sat:"Saturday",sun:"Sunday"};
+function buildSteps(){
+  var S=[];
+  S.push(function(tk){caption("The Aburrá valley","Medellín from above");state.day="all";renderUI();return flyStep(valleyCam(),5200,tk).then(function(ok){return ok&&wait(1800,tk)})});
+  S.push(function(tk){caption("Base","Sloh Hotel, Manila, El Poblado");state.sel="wed:1";renderUI();return flyStep(stopCam("H"),5600,tk).then(function(ok){return ok&&wait(2200,tk)})});
+  DAYS.forEach(function(d){
+    S.push(function(tk){
+      caption(DAYNAME[d.k]+" · "+d.lab.split(" ").slice(1).join(" "),d.title);state.day=d.k;clearAnim();renderUI();
+      var cam=d.k==="fri"?regionCam():dayCam(d.k);
+      return flyStep(cam,d.k==="fri"?5200:4200,tk).then(function(ok){return ok&&wait(1600,tk)});
+    });
+    for(var i=0;i<d.route.length-1;i++)(function(a,b){
+      S.push(function(tk){
+        var it=ALL.filter(function(x){return x.dk===d.k&&x.id===b})[0]||ALL.filter(function(x){return x.id===b})[0];
+        var f=legGeom(d.k,a,b);
+        caption(DAYNAME[d.k]+(f?" · "+f.properties.km+" km by road":""),STOPS[b].name);
+        var ms=b==="PEN"||a==="PEN"?7600:(b==="A"||a==="A"?6400:5200);
+        animateLeg(f,ms*0.9,tk);
+        if(it){state.sel=it.key;renderUI()}
+        return flyStep(stopCam(b),ms,tk).then(function(ok){return ok&&wait(b==="H"?1200:2600,tk)});
+      });
+    })(d.route[i],d.route[i+1]);
+  });
+  S.push(function(tk){caption("The whole trip","Medellín to Guatapé, five days");clearAnim();state.day="all";renderUI();return flyStep(regionCam(),6000,tk).then(function(ok){return ok&&wait(2500,tk)})});
+  return S;
+}
+function setPlayBtn(){
+  var b=$("#play");
+  var lab=player.state==="playing"?"Pause":(player.state==="paused"?"Resume":"Play the trip");
+  b.querySelector("span").textContent=lab;
+  b.querySelector("svg").innerHTML=player.state==="playing"?'<path d="M4 2.5h3v11H4zM9 2.5h3v11H9z"/>':'<path d="M4 2.5v11l9-5.5z"/>';
+  b.setAttribute("aria-pressed",String(player.state==="playing"));
+}
+function progress(){$("#prog").style.width=(player.steps.length?player.i/player.steps.length*100:0)+"%"}
+function run(){
+  var tk=++player.token;player.state="playing";setPlayBtn();
+  (function next(){
+    if(tk!==player.token)return;
+    if(player.i>=player.steps.length){player.state="idle";player.i=0;setPlayBtn();progress();setTimeout(function(){if(player.state==="idle")caption(null)},3000);return}
+    progress();
+    player.steps[player.i](tk).then(function(ok){if(ok&&tk===player.token){player.i++;next()}});
+  })();
+}
+function pause(){player.token++;player.state="paused";if(map)map.stop();setPlayBtn()}
+function stopPlay(){if(player.state==="idle")return;player.token++;player.state="idle";player.i=0;if(map)map.stop();clearAnim();caption(null);setPlayBtn();progress()}
+$("#play").addEventListener("click",function(){
+  if(!map)return;
+  if(player.state==="playing"){pause();return}
+  if(player.state==="idle"){player.steps=buildSteps();player.i=0}
+  run();
+});
+$("#restart").addEventListener("click",function(){if(!map)return;player.token++;if(map)map.stop();clearAnim();player.steps=buildSteps();player.i=0;run()});
+$("#speed").addEventListener("change",function(){player.speed=parseFloat(this.value)||1});
+
+/* ---------- boot ---------- */
+window.__trip={map:function(){return map},failures:failures,state:state,player:player};
+(function(){
+  var li=$("#dataSrc");if(li)li.innerHTML=D.sourcesHtml;
+})();
+renderUI();
+if(!window.maplibregl){$("#overlay").innerHTML='<div class="in"><strong>The map library didn’t load</strong><span class="when">Check your connection and reload. The itinerary and prices are below.</span></div>'}
+else{
+  try{initMap()}catch(e){$("#overlay").innerHTML='<div class="in"><strong>This browser can’t draw the 3D map</strong><span class="when">It needs WebGL. The itinerary and prices are below.</span></div>'}
+}
+})();
+</script>
