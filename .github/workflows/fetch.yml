@@ -1,0 +1,35 @@
+name: Fetch map data
+on:
+  workflow_dispatch:
+    inputs:
+      steps:
+        description: "Steps to run (space separated): terrain basemap geocode routes"
+        required: false
+        default: ""
+  push:
+    branches: [main]
+    paths: ["scripts/**", ".github/workflows/fetch.yml"]
+permissions:
+  contents: write
+concurrency:
+  group: fetch
+  cancel-in-progress: false
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Download terrain, basemap, geocodes and routes
+        run: python scripts/fetch.py ${{ github.event.inputs.steps }}
+      - name: Commit data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data
+          git commit -m "Update fetched map data" || echo "No changes"
+          git pull --rebase origin main
+          git push origin HEAD:main
