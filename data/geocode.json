@@ -1,0 +1,908 @@
+{
+  "H": {
+    "fallback": [
+      6.212,
+      -75.569
+    ],
+    "nominatim": [],
+    "overpass": []
+  },
+  "ELC": {
+    "fallback": [
+      6.2078,
+      -75.564
+    ],
+    "nominatim": [
+      {
+        "query": "El Cielo restaurante El Poblado Medellín",
+        "name": "El Cielo, 10A-22, Carrera 40, El Poblado, Comuna 14 - El Poblado, Perímetro Urbano Medellín, Medellín, Valle de Aburrá, Antioquia, RAP del Agua y la Montaña, 050003, Colombia",
+        "lat": 6.2105925,
+        "lon": -75.5675951,
+        "category": "amenity",
+        "type": "restaurant",
+        "osm": "node/6334359685"
+      }
+    ],
+    "overpass": [
+      {
+        "osm": "node/6334359685",
+        "name": "El Cielo",
+        "lat": 6.2105925,
+        "lon": -75.5675951,
+        "kind": {
+          "amenity": "restaurant"
+        }
+      },
+      {
+        "osm": "node/6629553425",
+        "name": "Hostal Casa en el Cielo",
+        "lat": 6.2379317,
+        "lon": -75.6022305,
+        "kind": {
+          "tourism": "guest_house"
+        }
+      },
+      {
+        "osm": "node/8001288285",
+        "name": "Mirador El Cielo",
+        "lat": 6.2077025,
+        "lon": -75.6086016,
+        "kind": {
+          "amenity": "restaurant"
+        }
+      },
+      {
+        "osm": "way/1529214496",
+        "name": "Camino del Cielo",
+        "lat": 6.090168,
+        "lon": -75.6378703,
+        "kind": {}
+      },
+      {
+        "osm": "way/1529214497",
+        "name": "Camino del Cielo",
+        "lat": 6.0900835,
+        "lon": -75.6378271,
+        "kind": {}
+      }
+    ]
+  },
+  "C13": {
+    "fallback": [
+      6.2553,
+      -75.614
+    ],
+    "nominatim": [
+      {
+        "query": "Comuna 13 San Javier Medellín",
+        "name": "Comuna 13 - San Javier, Perímetro Urbano Medellín, Medellín, Valle de Aburrá, Antioquia, RAP del Agua y la Montaña, 050033, Colombia",
+        "lat": 6.2562742,
+        "lon": -75.6215434,
+        "category": "boundary",
+        "type": "administrative",
+        "osm": "relation/7680798"
+      }
+    ],
+    "overpass": []
+  },
+  "MUS": {
+    "fallback": [
+      6.2519,
+      -75.5693
+    ],
+    "nominatim": [
+      {
+        "query": "Museo de Antioquia Medellín",
+        "name": "Museo de Antioquia, Carrera 52A, Estación Villa, Comuna 10 - La Candelaria, Perímetro Urbano Medellín, Medellín, Valle de Aburrá, Antioquia, RAP del Agua y la Montaña, 050010, Colombia",
+        "lat": 6.2524079,
+        "lon": -75.5691446,
+        "category": "tourism",
+        "type": "museum",
+        "osm": "way/28770080"
+      }
+    ],
+    "overpass": [
+      {
+        "osm": "node/7282651231",
+        "name": "Estación EnCicla Museo de Antioquia",
+        "lat": 6.2517881,
+        "lon": -75.5688039,
+        "kind": {
+          "amenity": "bicycle_rental"
+        }
+      },
+      {
+        "osm": "way/28770080",
+        "name": "Museo de Antioquia",
+        "lat": 6.2524031,
+        "lon": -75.5691441,
+        "kind": {
+          "tourism": "museum"
+        }
+      }
+    ]
+  },
+  "PAI": {
+    "fallback": [
+      6.2347,
+      -75.579
+    ],
+    "nominatim": [
+      {
+        "query": "Pueblito Paisa Medellín",
+        "name": "Pueblito Paisa, Acceso Pueblito Paisa, Cerro Nutibara, Comuna 16 - Belén, Perímetro Urbano Medellín, Medellín, Valle de Aburrá, Antioquia, RAP del Agua y la Montaña, 050015, Colombia",
+        "lat": 6.2361859,
+        "lon": -75.5802798,
+        "category": "amenity",
+        "type": "commercial",
+        "osm": "way/765380123"
+      }
+    ],
+    "overpass": [
+      {
+        "osm": "way/107255039",
+        "name": "Acceso Pueblito Paisa",
+        "lat": 6.2355978,
+        "lon": -75.580614,
+        "kind": {
+          "highway": "unclassified"
+        }
+      },
+      {
+        "osm": "way/751986247",
+        "name": "Acceso Pueblito Paisa",
+        "lat": 6.2357057,
+        "lon": -75.5800875,
+        "kind": {
+          "highway": "unclassified"
+        }
+      },
+      {
+        "osm": "way/765380123",
+        "name": "Pueblito Paisa",
+        "lat": 6.2361748,
+        "lon": -75.5802032,
+        "kind": {
+          "amenity": "commercial"
+        }
+      },
+      {
+        "osm": "way/1016815078",
+        "name": "Acceso Pueblito Paisa",
+        "lat": 6.2334201,
+        "lon": -75.5800792,
+        "kind": {
+          "highway": "unclassified"
+        }
+      },
+      {
+        "osm": "way/1016815079",
+        "name": "Acceso Pueblito Paisa",
+        "lat": 6.2334212,
+        "lon": -75.5800267,
+        "kind": {
+          "highway": "unclassified"
+        }
+      },
+      {
+        "osm": "way/1020641377",
+        "name": "Acceso Pueblito Paisa",
+        "lat": 6.2357015,
+        "lon": -75.5801025,
+        "kind": {
+          "highway": "unclassified"
+        }
+      },
+      {
+        "osm": "way/1020641378",
+        "name": "Acceso Pueblito Paisa",
+        "lat": 6.236195,
+        "lon": -75.5804087,
+        "kind": {
+          "highway": "footway"
+        }
+      },
+      {
+        "osm": "way/1020641380",
+        "name": "Acceso Pueblito Paisa",
+        "lat": 6.2331909,
+        "lon": -75.5800828,
+        "kind": {
+          "highway": "unclassified"
+        }
+      },
+      {
+        "osm": "way/1020641381",
+        "name": "Acceso Pueblito Paisa",
+        "lat": 6.2331813,
+        "lon": -75.5799818,
+        "kind": {
+          "highway": "unclassified"
+        }
+      },
+      {
+        "osm": "way/1065966686",
+        "name": "Acceso Pueblito Paisa",
+        "lat": 6.2353608,
+        "lon": -75.5799147,
+        "kind": {
+          "highway": "unclassified"
+        }
+      },
+      {
+        "osm": "way/1531748977",
+        "name": "Acceso Pueblito Paisa",
+        "lat": 6.2369456,
+        "lon": -75.5805641,
+        "kind": {
+          "highway": "footway"
+        }
+      },
+      {
+        "osm": "way/1531748978",
+        "name": "Acceso Pueblito Paisa",
+        "lat": 6.2366802,
+        "lon": -75.5804899,
+        "kind": {
+          "highway": "footway"
+        }
+      }
+    ]
+  },
+  "BOT": {
+    "fallback": [
+      6.2716,
+      -75.5637
+    ],
+    "nominatim": [
+      {
+        "query": "Jardín Botánico de Medellín",
+        "name": "Jardín Botánico, Comuna 4 - Aranjuez, Perímetro Urbano Medellín, Medellín, Valle de Aburrá, Antioquia, RAP del Agua y la Montaña, Colombia",
+        "lat": 6.2705481,
+        "lon": -75.5635288,
+        "category": "leisure",
+        "type": "garden",
+        "osm": "way/28770266"
+      }
+    ],
+    "overpass": [
+      {
+        "osm": "node/7253708906",
+        "name": "Biciparquadero Jardin Botanico",
+        "lat": 6.2696696,
+        "lon": -75.5645796,
+        "kind": {
+          "amenity": "bicycle_parking"
+        }
+      },
+      {
+        "osm": "node/9442684889",
+        "name": "Jardin Botanico",
+        "lat": 6.2669167,
+        "lon": -75.5631667,
+        "kind": {}
+      },
+      {
+        "osm": "way/28770266",
+        "name": "Jardín Botánico",
+        "lat": 6.2706113,
+        "lon": -75.5635641,
+        "kind": {
+          "leisure": "garden"
+        }
+      },
+      {
+        "osm": "way/457993329",
+        "name": "Ciclorruta Jardin Botanico",
+        "lat": 6.2704836,
+        "lon": -75.5641622,
+        "kind": {
+          "highway": "cycleway"
+        }
+      },
+      {
+        "osm": "way/1372245567",
+        "name": "Jardín Botánico",
+        "lat": 6.1726864,
+        "lon": -75.339816,
+        "kind": {
+          "leisure": "garden"
+        }
+      }
+    ]
+  },
+  "ARV": {
+    "fallback": [
+      6.276,
+      -75.4985
+    ],
+    "nominatim": [
+      {
+        "query": "Parque Arví Medellín",
+        "name": "Parque Arví, Calle 86, Piedras Blancas - Matasano, Santa Elena, Medellín, Valle de Aburrá, Antioquia, RAP del Agua y la Montaña, 050007, Colombia",
+        "lat": 6.2813969,
+        "lon": -75.5026883,
+        "category": "information",
+        "type": "office",
+        "osm": "node/6751557985"
+      },
+      {
+        "query": "Parque Arví Medellín",
+        "name": "Parque Arví, Carrera 42 Este, Piedras Blancas - Matasano, Santa Elena, Medellín, Valle de Aburrá, Antioquia, RAP del Agua y la Montaña, 050007, Colombia",
+        "lat": 6.2781712,
+        "lon": -75.4975627,
+        "category": "information",
+        "type": "board",
+        "osm": "node/6751329388"
+      },
+      {
+        "query": "Parque Arví Medellín",
+        "name": "Parque Arvi, Piedras Blancas - Matasano, Santa Elena, Medellín, Valle de Aburrá, Antioquia, RAP del Agua y la Montaña, 050011, Colombia",
+        "lat": 6.278798,
+        "lon": -75.5145076,
+        "category": "highway",
+        "type": "unclassified",
+        "osm": "way/258915045"
+      }
+    ],
+    "overpass": [
+      {
+        "osm": "node/1226799261",
+        "name": "Arví",
+        "lat": 6.2815038,
+        "lon": -75.5029613,
+        "kind": {
+          "aerialway": "yes",
+          "public_transport": "stop_position"
+        }
+      },
+      {
+        "osm": "node/2281016602",
+        "name": "Parque Nacional Arví",
+        "lat": 6.2810186,
+        "lon": -75.5024401,
+        "kind": {
+          "tourism": "information"
+        }
+      },
+      {
+        "osm": "node/6751329388",
+        "name": "Parque Arví",
+        "lat": 6.2781712,
+        "lon": -75.4975627,
+        "kind": {
+          "tourism": "information"
+        }
+      },
+      {
+        "osm": "node/6751557985",
+        "name": "Parque Arví",
+        "lat": 6.2813969,
+        "lon": -75.5026883,
+        "kind": {
+          "tourism": "information"
+        }
+      },
+      {
+        "osm": "node/6839080586",
+        "name": "Parche Arvi",
+        "lat": 6.2808092,
+        "lon": -75.5036943,
+        "kind": {
+          "amenity": "restaurant"
+        }
+      },
+      {
+        "osm": "way/218897899",
+        "name": "Centro de operaciones Parque Arví",
+        "lat": 6.2810053,
+        "lon": -75.5025289,
+        "kind": {}
+      },
+      {
+        "osm": "way/258915044",
+        "name": "Arví",
+        "lat": 6.2813439,
+        "lon": -75.5030071,
+        "kind": {
+          "aerialway": "station",
+          "public_transport": "station"
+        }
+      },
+      {
+        "osm": "way/258915045",
+        "name": "Parque Arvi",
+        "lat": 6.2775436,
+        "lon": -75.5138052,
+        "kind": {
+          "highway": "unclassified"
+        }
+      },
+      {
+        "osm": "way/931879130",
+        "name": "Mercado Arví",
+        "lat": 6.2816573,
+        "lon": -75.5026481,
+        "kind": {}
+      },
+      {
+        "osm": "relation/1520620",
+        "name": "Arví",
+        "lat": 6.2813439,
+        "lon": -75.5030071,
+        "kind": {
+          "public_transport": "stop_area"
+        }
+      },
+      {
+        "osm": "relation/1520815",
+        "name": "Metrocable Línea L: Dirección Arví",
+        "lat": 6.2873173,
+        "lon": -75.5224176,
+        "kind": {}
+      }
+    ]
+  },
+  "PEN": {
+    "fallback": [
+      6.2225,
+      -75.1783
+    ],
+    "nominatim": [
+      {
+        "query": "Piedra del Peñol",
+        "name": "Piedra del Peñol, Guatapé, Oriente, Antioquia, RAP del Agua y la Montaña, 053854, Colombia",
+        "lat": 6.2200247,
+        "lon": -75.179433,
+        "category": "natural",
+        "type": "peak",
+        "osm": "node/3400741653"
+      },
+      {
+        "query": "Piedra del Peñol",
+        "name": "El Peñón de Guatapé, Guatapé, Oriente, Antioquia, RAP del Agua y la Montaña, Colombia",
+        "lat": 6.2193495,
+        "lon": -75.1794404,
+        "category": "place",
+        "type": "locality",
+        "osm": "way/332953614"
+      },
+      {
+        "query": "Piedra del Peñol Guatapé",
+        "name": "Piedra del Peñol, Guatapé, Oriente, Antioquia, RAP del Agua y la Montaña, 053854, Colombia",
+        "lat": 6.2200247,
+        "lon": -75.179433,
+        "category": "natural",
+        "type": "peak",
+        "osm": "node/3400741653"
+      },
+      {
+        "query": "Piedra del Peñol Guatapé",
+        "name": "El Peñón de Guatapé, Guatapé, Oriente, Antioquia, RAP del Agua y la Montaña, Colombia",
+        "lat": 6.2193495,
+        "lon": -75.1794404,
+        "category": "place",
+        "type": "locality",
+        "osm": "way/332953614"
+      }
+    ],
+    "overpass": [
+      {
+        "osm": "node/701651329",
+        "name": "El Peñol",
+        "lat": 6.2187927,
+        "lon": -75.2432026,
+        "kind": {}
+      },
+      {
+        "osm": "node/703177400",
+        "name": "El Peñol",
+        "lat": 6.1874222,
+        "lon": -75.5100316,
+        "kind": {}
+      },
+      {
+        "osm": "node/703178366",
+        "name": "Embalse El Peñol",
+        "lat": 6.2855878,
+        "lon": -75.1799709,
+        "kind": {}
+      },
+      {
+        "osm": "node/703179487",
+        "name": "Penolcito",
+        "lat": 6.341373,
+        "lon": -75.498506,
+        "kind": {}
+      },
+      {
+        "osm": "node/1212799681",
+        "name": "Municipio de El Peñol",
+        "lat": 6.2168512,
+        "lon": -75.2434379,
+        "kind": {
+          "amenity": "townhall"
+        }
+      },
+      {
+        "osm": "node/1212800924",
+        "name": "Coliseo de El Peñol",
+        "lat": 6.2184244,
+        "lon": -75.2439475,
+        "kind": {
+          "leisure": "stadium"
+        }
+      },
+      {
+        "osm": "node/3400741653",
+        "name": "Piedra del Peñol",
+        "lat": 6.2200247,
+        "lon": -75.179433,
+        "kind": {
+          "natural": "peak"
+        }
+      },
+      {
+        "osm": "node/5326014821",
+        "name": "Mirador del Peñol",
+        "lat": 6.2427802,
+        "lon": -75.1620463,
+        "kind": {
+          "tourism": "viewpoint"
+        }
+      },
+      {
+        "osm": "node/9442684904",
+        "name": "Penol El",
+        "lat": 6.2142222,
+        "lon": -75.2413056,
+        "kind": {}
+      },
+      {
+        "osm": "node/9445921943",
+        "name": "Penol",
+        "lat": 6.2333333,
+        "lon": -75.2166667,
+        "kind": {}
+      },
+      {
+        "osm": "node/12097361029",
+        "name": "Don Peñolini",
+        "lat": 6.1721794,
+        "lon": -75.3339575,
+        "kind": {
+          "amenity": "restaurant"
+        }
+      },
+      {
+        "osm": "node/12487372899",
+        "name": "Centro Educativo Rural Peñolcito",
+        "lat": 6.2741905,
+        "lon": -75.2598647,
+        "kind": {
+          "amenity": "school"
+        }
+      },
+      {
+        "osm": "node/12487374573",
+        "name": "Escuela Rural Peñolcito",
+        "lat": 6.331111,
+        "lon": -75.485278,
+        "kind": {
+          "amenity": "school"
+        }
+      },
+      {
+        "osm": "node/12487374669",
+        "name": "Centro Educativo Rural San Pedro Peñol Parte Baja",
+        "lat": 6.3420518,
+        "lon": -75.241832,
+        "kind": {
+          "amenity": "school"
+        }
+      },
+      {
+        "osm": "node/12487374737",
+        "name": "Centro Educativo Rural San Pedro Peñol Parte Alta",
+        "lat": 6.3565297,
+        "lon": -75.2433049,
+        "kind": {
+          "amenity": "school"
+        }
+      },
+      {
+        "osm": "node/12542224901",
+        "name": "Vans to Peñol",
+        "lat": 6.1527788,
+        "lon": -75.3713955,
+        "kind": {
+          "amenity": "bus_station"
+        }
+      },
+      {
+        "osm": "node/13129067882",
+        "name": "El Viejo Peñol",
+        "lat": 6.2175142,
+        "lon": -75.2289676,
+        "kind": {}
+      },
+      {
+        "osm": "way/45772852",
+        "name": "Vía El Peñol - Guatapé",
+        "lat": 6.2164555,
+        "lon": -75.2284663,
+        "kind": {
+          "highway": "secondary"
+        }
+      },
+      {
+        "osm": "way/45772853",
+        "name": "Vía Marinilla - El Peñol",
+        "lat": 6.1804571,
+        "lon": -75.3075875,
+        "kind": {
+          "highway": "secondary"
+        }
+      },
+      {
+        "osm": "way/105107847",
+        "name": "Iglesia de El Peñol",
+        "lat": 6.2164085,
+        "lon": -75.2436857,
+        "kind": {
+          "amenity": "place_of_worship"
+        }
+      },
+      {
+        "osm": "way/105107848",
+        "name": "Réplica antiguo Peñol",
+        "lat": 6.2176157,
+        "lon": -75.229189,
+        "kind": {
+          "tourism": "attraction"
+        }
+      },
+      {
+        "osm": "way/178877031",
+        "name": "Vía Marinilla - El Peñol",
+        "lat": 6.2236284,
+        "lon": -75.2707022,
+        "kind": {
+          "highway": "secondary"
+        }
+      },
+      {
+        "osm": "way/178877033",
+        "name": "Vía El Peñol - Guatapé",
+        "lat": 6.2233737,
+        "lon": -75.1843887,
+        "kind": {
+          "highway": "secondary"
+        }
+      },
+      {
+        "osm": "way/178877034",
+        "name": "Vía El Peñol - Guatapé",
+        "lat": 6.220087,
+        "lon": -75.1896044,
+        "kind": {
+          "highway": "secondary"
+        }
+      },
+      {
+        "osm": "way/178877035",
+        "name": "Vía El Peñol - Guatapé",
+        "lat": 6.2049856,
+        "lon": -75.2009317,
+        "kind": {
+          "highway": "secondary"
+        }
+      },
+      {
+        "osm": "way/178877036",
+        "name": "Vía El Peñol - Guatapé",
+        "lat": 6.2118012,
+        "lon": -75.1952108,
+        "kind": {
+          "highway": "secondary"
+        }
+      },
+      {
+        "osm": "way/178877037",
+        "name": "Vía El Peñol - Guatapé",
+        "lat": 6.2053925,
+        "lon": -75.2127531,
+        "kind": {
+          "highway": "secondary"
+        }
+      },
+      {
+        "osm": "way/178877038",
+        "name": "Vía El Peñol - Guatapé",
+        "lat": 6.2281497,
+        "lon": -75.1794794,
+        "kind": {
+          "highway": "secondary"
+        }
+      },
+      {
+        "osm": "way/231156604",
+        "name": "El Santuario - El Peñol",
+        "lat": 6.1506118,
+        "lon": -75.2648779,
+        "kind": {
+          "highway": "tertiary"
+        }
+      },
+      {
+        "osm": "way/236789487",
+        "name": "El Santuario - El Peñol",
+        "lat": 6.1732684,
+        "lon": -75.2431109,
+        "kind": {
+          "highway": "tertiary"
+        }
+      },
+      {
+        "osm": "way/332954593",
+        "name": "Vía El Peñol - Guatapé",
+        "lat": 6.2324827,
+        "lon": -75.1705968,
+        "kind": {
+          "highway": "secondary"
+        }
+      },
+      {
+        "osm": "way/392694638",
+        "name": "Vía El Peñol - Guatapé",
+        "lat": 6.2112969,
+        "lon": -75.2225193,
+        "kind": {
+          "highway": "secondary"
+        }
+      },
+      {
+        "osm": "way/393852092",
+        "name": "El Santuario - El Peñol",
+        "lat": 6.1634477,
+        "lon": -75.2579351,
+        "kind": {
+          "highway": "tertiary"
+        }
+      },
+      {
+        "osm": "way/506779711",
+        "name": "Vía Marinilla - El Peñol",
+        "lat": 6.2265971,
+        "lon": -75.2622066,
+        "kind": {
+          "highway": "secondary"
+        }
+      },
+      {
+        "osm": "way/506779712",
+        "name": "Vía El Peñol - Guatapé",
+        "lat": 6.2160128,
+        "lon": -75.2327138,
+        "kind": {
+          "highway": "secondary"
+        }
+      },
+      {
+        "osm": "way/538391688",
+        "name": "Quebrada Peñolcito",
+        "lat": 6.2734993,
+        "lon": -75.2625951,
+        "kind": {}
+      },
+      {
+        "osm": "way/549964317",
+        "name": "Vía Marinilla - El Peñol",
+        "lat": 6.2253395,
+        "lon": -75.2548897,
+        "kind": {
+          "highway": "secondary"
+        }
+      },
+      {
+        "osm": "way/565126993",
+        "name": "Quebrada Peñoles",
+        "lat": 6.1073947,
+        "lon": -75.0841617,
+        "kind": {}
+      },
+      {
+        "osm": "way/935971275",
+        "name": "Vía Marinilla - El Peñol",
+        "lat": 6.1701928,
+        "lon": -75.3278019,
+        "kind": {
+          "highway": "secondary"
+        }
+      },
+      {
+        "osm": "way/935971276",
+        "name": "Vía Marinilla - El Peñol",
+        "lat": 6.173662,
+        "lon": -75.3205586,
+        "kind": {
+          "highway": "secondary"
+        }
+      }
+    ]
+  },
+  "A": {
+    "fallback": [
+      6.1645,
+      -75.4231
+    ],
+    "nominatim": [
+      {
+        "query": "Aeropuerto Internacional José María Córdova",
+        "name": "Aeropuerto Internacional José María Córdova, Acceso Llegadas, Rionegro, Oriente, Antioquia, RAP del Agua y la Montaña, 054047, Colombia",
+        "lat": 6.1658678,
+        "lon": -75.4239141,
+        "category": "aeroway",
+        "type": "aerodrome",
+        "osm": "way/175757629"
+      }
+    ],
+    "overpass": [
+      {
+        "osm": "node/4285404191",
+        "name": "José María Córdova (MDE) Airport Bus",
+        "lat": 6.2528597,
+        "lon": -75.5671965,
+        "kind": {
+          "amenity": "bus_station"
+        }
+      },
+      {
+        "osm": "node/5305501826",
+        "name": "Bus al Aeropuerto José María Córdova",
+        "lat": 6.1519673,
+        "lon": -75.3744215,
+        "kind": {
+          "highway": "bus_stop",
+          "public_transport": "platform"
+        }
+      },
+      {
+        "osm": "node/13009960814",
+        "name": "Punto de carga Texaco Combuscol Aeropuerto José María Córdova",
+        "lat": 6.1794985,
+        "lon": -75.4421272,
+        "kind": {
+          "amenity": "charging_station"
+        }
+      },
+      {
+        "osm": "way/175757629",
+        "name": "Aeropuerto Internacional José María Córdova",
+        "lat": 6.1658593,
+        "lon": -75.4253163,
+        "kind": {
+          "aeroway": "aerodrome"
+        }
+      },
+      {
+        "osm": "way/362442561",
+        "name": "Liceo José María Córdova",
+        "lat": 6.1446476,
+        "lon": -75.3730508,
+        "kind": {
+          "amenity": "school"
+        }
+      },
+      {
+        "osm": "way/564177371",
+        "name": "Plaza de Mercado José María Córdova",
+        "lat": 6.1414245,
+        "lon": -75.265761,
+        "kind": {
+          "amenity": "marketplace"
+        }
+      }
+    ]
+  }
+}
