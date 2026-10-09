@@ -1,7 +1,7 @@
 """Pack fetched real geodata into a few files the artifact page loads, and build the page.
 
 Inputs : data/ (from fetch.py), scripts/stops.json, app/page.template.html, maplibre css
-Outputs: build/medellin-trip-map.html, build/data/*.bin
+Outputs: build/medellin-trip-map.html, build/data/*.wasm (raw byte packs, named .wasm only because artifact hosting serves no .bin)
 """
 import copy, json, math, os, sys
 from PIL import Image
@@ -27,18 +27,18 @@ def bin_for(path):
     if kind == "terrain":
         z = int(parts[1])
         if z < 12:
-            return "base.bin"
+            return "base.wasm"
         x = int(parts[2])
-        return "terrain12-w.bin" if x < 1190 else "terrain12-e.bin"
+        return "terrain12-w.wasm" if x < 1190 else "terrain12-e.wasm"
     if kind == "vector":
         z, x = int(parts[1]), int(parts[2])
         if z <= 12:
-            return "base.bin"
+            return "base.wasm"
         if z == 13:
-            return "vector13.bin"
+            return "vector13.wasm"
         # z14: split by x so each pack stays a few MB
-        return f"vector14-{(x - 4745) // 8}.bin"
-    return "base.bin"
+        return f"vector14-{(x - 4745) // 8}.wasm"
+    return "base.wasm"
 
 for sub in ("vector", "terrain", "glyphs", "sprites"):
     for rel, full in walk(sub):
