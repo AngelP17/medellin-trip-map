@@ -230,15 +230,6 @@ def routes():
     LOG["counts"]["routes"] = len(feats)
 
 
-if __name__ == "__main__":
-    steps = sys.argv[1:] or ["terrain", "basemap", "geocode", "routes"]
-    for step in steps:
-        globals()[step]()
-    LOG["finished"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
-    save(f"{OUT}/fetch-log.json", json.dumps(LOG, indent=2).encode())
-    print(json.dumps(LOG["counts"]), "failures:", len(LOG["failures"]))
-
-
 def _overpass(q):
     st, body = get("https://overpass-api.de/api/interpreter?" + urllib.parse.urlencode({"data": q}))
     time.sleep(1.5)
@@ -274,3 +265,18 @@ def geocode2():
         time.sleep(1.2)
         out["nominatim:" + q] = json.loads(body) if st == 200 else {"status": st}
     save(f"{OUT}/geocode2.json", json.dumps(out, indent=2, ensure_ascii=False).encode())
+
+
+if __name__ == "__main__":
+    import traceback
+    steps = sys.argv[1:] or ["terrain", "basemap", "geocode", "routes"]
+    try:
+        for step in steps:
+            globals()[step]()
+    except Exception:  # noqa: BLE001
+        LOG["failures"].append({"kind": "crash", "trace": traceback.format_exc()})
+        print(traceback.format_exc(), flush=True)
+    LOG["finished"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+    LOG["steps"] = steps
+    save(f"{OUT}/fetch-log.json", json.dumps(LOG, indent=2).encode())
+    print(json.dumps(LOG["counts"]), "failures:", len(LOG["failures"]))
